@@ -28,8 +28,17 @@
             font-family: 'Poppins', sans-serif;
             background: #ff9a9e;
             color: #444;
-            overflow: hidden;
+            /* Prevent horizontal scroll on mobile */
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            /* Initial state (locked) */
             scroll-behavior: smooth;
+        }
+
+        html {
+            width: 100%;
+            overflow-x: hidden;
         }
 
         /* --- Lock Screen --- */
@@ -1058,9 +1067,11 @@
 
         // JS to handle scroll unlock properly
         function unlockScroll() {
-            document.body.style.overflow = 'auto';
-            // Fix for some mobile browsers needing a kick
-            document.documentElement.style.overflow = 'auto';
+            document.body.style.overflowY = 'auto'; // Only unlock vertical
+            document.body.style.overflowX = 'hidden'; // Keep horizontal locked
+
+            document.documentElement.style.overflowY = 'auto';
+            document.documentElement.style.overflowX = 'hidden';
         }
 
         // Developing Photo Observer
@@ -1119,7 +1130,8 @@
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
+            // Limit to 90vw to avoid edge overflow causing scrollbars
+            heart.style.left = Math.random() * 90 + 'vw';
             heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
             document.getElementById('hearts').appendChild(heart);
             setTimeout(() => heart.remove(), 6000);
