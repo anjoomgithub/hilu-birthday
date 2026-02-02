@@ -80,13 +80,17 @@
         }
 
         /* --- Main Content --- */
+        /* --- Main Content --- */
         #main-content {
             opacity: 0;
             visibility: hidden;
             transition: 2s ease;
-            height: 100vh;
-            overflow-y: auto;
+            min-height: 100vh;
+            /* Allow natural body scroll for better mobile handling */
+            height: auto;
+            overflow: visible;
             position: relative;
+            padding-bottom: 50px;
         }
 
         /* --- Cake Overlay & Sparkles --- */
@@ -304,19 +308,60 @@
                 flex-direction: column;
                 gap: 40px;
                 text-align: center;
+                padding-top: 20px;
             }
 
             .hero-content {
                 text-align: center;
+                padding: 0 10px;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+                /* Smaller font for mobile title */
             }
 
             .countdown {
                 justify-content: center;
+                gap: 10px;
+                /* Tighter gap */
+            }
+
+            .time-box {
+                min-width: 60px;
+                /* Smaller boxes */
+                padding: 10px 5px;
+            }
+
+            .time-box .num {
+                font-size: 1.2rem;
+            }
+
+            .time-box .label {
+                font-size: 0.7rem;
             }
 
             .hero-photo-wrapper {
-                width: 260px;
-                height: 320px;
+                width: 240px;
+                height: 300px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .glass-card {
+                padding: 30px 15px;
+                margin: 30px auto;
+                border-radius: 20px;
+            }
+
+            h2 {
+                font-size: 2.5rem !important;
+            }
+
+            .photo-frame {
+                padding: 8px 8px 30px 8px;
+                /* Compact polaroid */
             }
         }
 
@@ -1003,7 +1048,7 @@
                     const main = document.getElementById('main-content');
                     main.style.visibility = 'visible';
                     main.style.opacity = '1';
-                    document.body.style.overflow = 'auto';
+                    unlockScroll();
                     document.getElementById('bgMusic').play();
                     setInterval(createHeart, 300);
                     initDevelopingPhotos();
@@ -1011,17 +1056,22 @@
             } else { document.getElementById('hint').style.display = 'block'; }
         }
 
+        // JS to handle scroll unlock properly
+        function unlockScroll() {
+            document.body.style.overflow = 'auto';
+            // Fix for some mobile browsers needing a kick
+            document.documentElement.style.overflow = 'auto';
+        }
+
         // Developing Photo Observer
         // Developing Photo & Frame Observer
         function initDevelopingPhotos() {
-            const observerOptions = { threshold: 0.2 }; // Trigger earlier
+            const observerOptions = { threshold: 0.1 }; // Trigger even earlier for mobile
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        // Add staggered delay based on index logic if desired, or just let natural scroll handle it
-                        setTimeout(() => {
-                            entry.target.classList.add('developed');
-                        }, 100);
+                        entry.target.classList.add('developed');
+                        // Removed setTimeout for instant "fast" feel
                     }
                 });
             }, observerOptions);
