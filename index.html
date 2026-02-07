@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -290,7 +290,7 @@
             display: flex;
             gap: 20px;
             margin-bottom: 35px;
-            justify-content: flex-start;
+            justify-content: center;
         }
 
         .time-box {
@@ -601,6 +601,14 @@
             filter: grayscale(0%) contrast(1);
         }
 
+        .memory-date {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #555;
+            margin-top: 15px;
+            text-align: center;
+        }
+
         /* Pin Effect */
         .pin {
             width: 15px;
@@ -729,6 +737,14 @@
     <div id="lock-screen">
         <div class="lock-card">
             <h2 style="color:#fff; font-family:'Dancing Script'; font-size: 3rem;">For Hiluuu❤️ Only</h2>
+
+            <div class="countdown" style="margin-bottom: 20px;">
+                <div class="time-box"><span class="num" id="days">00</span><span class="label">Days</span></div>
+                <div class="time-box"><span class="num" id="hours">00</span><span class="label">Hrs</span></div>
+                <div class="time-box"><span class="num" id="mins">00</span><span class="label">Mins</span></div>
+                <div class="time-box"><span class="num" id="secs">00</span><span class="label">Secs</span></div>
+            </div>
+
             <p style="color:#fff;">Enter the special date (DDMM)</p>
             <input type="password" id="pass-input" maxlength="4" placeholder="••••">
             <br>
@@ -785,13 +801,6 @@
                 <div class="hero-content">
                     <h1>Happy 22<sup>nd</sup> Birthday, <br>Hiluuu❤️</h1>
 
-                    <div class="countdown">
-                        <div class="time-box"><span class="num" id="days">00</span><span class="label">Days</span></div>
-                        <div class="time-box"><span class="num" id="hours">00</span><span class="label">Hrs</span></div>
-                        <div class="time-box"><span class="num" id="mins">00</span><span class="label">Mins</span></div>
-                        <div class="time-box"><span class="num" id="secs">00</span><span class="label">Secs</span></div>
-                    </div>
-
                     <button class="surprise-btn" onclick="showSurprise()">Click for a Surprise! ✨</button>
                 </div>
 
@@ -807,152 +816,182 @@
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory1.jpeg" class="developing-photo" loading="lazy" alt="Memory 1">
+                    <div class="memory-date">16 Feb 2022</div>
                 </div>
                 <!-- Memory 2 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory2.jpeg" class="developing-photo" loading="lazy" alt="Memory 2">
+                    <div class="memory-date">16 Feb 2022</div>
                 </div>
                 <!-- Memory 3 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory3.jpeg" class="developing-photo" loading="lazy" alt="Memory 3">
+                    <div class="memory-date">11 May 2022</div>
                 </div>
 
                 <!-- Memory 4 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory4.jpeg" class="developing-photo" loading="lazy" alt="Memory 4">
+                    <div class="memory-date">2 Oct 2022</div>
                 </div>
                 <!-- Memory 5 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory5.jpeg" class="developing-photo" loading="lazy" alt="Memory 5">
+                    <div class="memory-date">24 Nov 2022</div>
                 </div>
                 <!-- Memory 6 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory6.jpeg" class="developing-photo" loading="lazy" alt="Memory 6">
+                    <div class="memory-date">23 Dec 2022</div>
                 </div>
                 <!-- Memory 7 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory7.jpeg" class="developing-photo" loading="lazy" alt="Memory 7">
+                    <div class="memory-date">23 Dec 2022</div>
                 </div>
                 <!-- Memory 8 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory8.jpeg" class="developing-photo" loading="lazy" alt="Memory 8">
+                    <div class="memory-date">20 Jan 2023</div>
                 </div>
                 <!-- Memory 9 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory9.jpeg" class="developing-photo" loading="lazy" alt="Memory 9">
+                    <div class="memory-date">20 Jan 2023</div>
                 </div>
                 <!-- Memory 10 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory10.jpeg" class="developing-photo" loading="lazy" alt="Memory 10">
+                    <div class="memory-date">24 Jan 2023</div>
                 </div>
                 <!-- Memory 11 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory11.jpeg" class="developing-photo" loading="lazy" alt="Memory 11">
+                    <div class="memory-date">7 Feb 2023</div>
                 </div>
                 <!-- Memory 12 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory12.jpeg" class="developing-photo" loading="lazy" alt="Memory 12">
+                    <div class="memory-date">16 Feb 2023</div>
                 </div>
                 <!-- Memory 13 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory13.jpeg" class="developing-photo" loading="lazy" alt="Memory 13">
+                    <div class="memory-date">10 May 2023</div>
                 </div>
                 <!-- Memory 14 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory14.jpeg" class="developing-photo" loading="lazy" alt="Memory 14">
+                    <div class="memory-date">29 Sep 2023</div>
                 </div>
                 <!-- Memory 15 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory15.jpeg" class="developing-photo" loading="lazy" alt="Memory 15">
+                    <div class="memory-date">13 Nov 2023</div>
                 </div>
                 <!-- Memory 16 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory16.jpeg" class="developing-photo" loading="lazy" alt="Memory 16">
+                    <div class="memory-date">7 Oct 2024</div>
                 </div>
                 <!-- Memory 17 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory17.jpeg" class="developing-photo" loading="lazy" alt="Memory 17">
+                    <div class="memory-date">6 Dec 2024</div>
                 </div>
                 <!-- Memory 18 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory18.jpeg" class="developing-photo" loading="lazy" alt="Memory 18">
+                    <div class="memory-date">21 Jan 2025</div>
                 </div>
                 <!-- Memory 19 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory19.jpeg" class="developing-photo" loading="lazy" alt="Memory 19">
+                    <div class="memory-date">12 July 2025</div>
                 </div>
                 <!-- Memory 20 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory20.jpeg" class="developing-photo" loading="lazy" alt="Memory 20">
+                    <div class="memory-date">31 July 2025</div>
                 </div>
                 <!-- Memory 21 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory21.jpeg" class="developing-photo" loading="lazy" alt="Memory 21">
+                    <div class="memory-date">7 Aug 2025</div>
                 </div>
                 <!-- Memory 22 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory22.jpeg" class="developing-photo" loading="lazy" alt="Memory 22">
+                    <div class="memory-date">13 Aug 2025</div>
                 </div>
                 <!-- Memory 23 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory23.jpeg" class="developing-photo" loading="lazy" alt="Memory 23">
+                    <div class="memory-date">13 Aug 2025</div>
                 </div>
                 <!-- Memory 24 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory24.jpeg" class="developing-photo" loading="lazy" alt="Memory 24">
+                    <div class="memory-date">22 Aug 2025</div>
                 </div>
                 <!-- Memory 25 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory25.jpeg" class="developing-photo" loading="lazy" alt="Memory 25">
+                    <div class="memory-date">29 Aug 2025</div>
                 </div>
                 <!-- Memory 26 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory26.jpeg" class="developing-photo" loading="lazy" alt="Memory 26">
+                    <div class="memory-date">24 Sep 2025</div>
                 </div>
                 <!-- Memory 27 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory27.jpeg" class="developing-photo" loading="lazy" alt="Memory 27">
+                    <div class="memory-date">27 Oct 2025</div>
                 </div>
                 <!-- Memory 28 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory28.jpeg" class="developing-photo" loading="lazy" alt="Memory 28">
+                    <div class="memory-date">21 Nov 2025</div>
                 </div>
                 <!-- Memory 29 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory29.jpeg" class="developing-photo" loading="lazy" alt="Memory 29">
+                    <div class="memory-date">15 Jan 2025</div>
                 </div>
                 <!-- Memory 30 -->
                 <div class="photo-frame">
                     <div class="tape"></div>
                     <img src="memory30.jpeg" class="developing-photo" loading="lazy" alt="Memory 30">
+                    <div class="memory-date">15 Jan 2025</div>
                 </div>
             </div>
         </div>
@@ -967,6 +1006,8 @@
                     <source src="videoMemory.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+            </div>
+            <div class="memory-date" style="text-align: center; color: var(--dark-pink); margin-top: 20px;">Feb 02, 2026
             </div>
         </div>
 
