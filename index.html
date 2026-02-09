@@ -729,6 +729,115 @@
                 opacity: 0;
             }
         }
+
+        /* Input Shake Animation */
+        .shake-input {
+            animation: shake-input 0.4s cubic-bezier(.36, .07, .19, .97) both;
+            border: 2px solid var(--dark-pink) !important;
+            color: var(--dark-pink) !important;
+        }
+
+        @keyframes shake-input {
+
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+
+        /* Falling Emojis in Modal */
+        .modal-rain-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .falling-emoji {
+            position: absolute;
+            top: -50px;
+            font-size: 24px;
+            animation: fall linear forwards;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        /* --- Funny Wait Modal --- */
+        #wait-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 20000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        #wait-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .wait-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            transform: scale(0.5);
+            transition: 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+            /* Bouncy effect */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 4px solid var(--primary-pink);
+        }
+
+        #wait-modal.active .wait-card {
+            transform: scale(1);
+        }
+
+        .wait-emoji {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 20px;
+            animation: shake 0.5s infinite alternate;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: rotate(-10deg);
+            }
+
+            100% {
+                transform: rotate(10deg);
+            }
+        }
     </style>
 </head>
 
@@ -1084,26 +1193,129 @@
         </footer>
     </div>
 
+    <!-- Funny Wait Modal -->
+    <div id="wait-modal">
+        <div class="modal-rain-container" id="modal-rain"></div>
+        <div class="wait-card">
+            <!-- Using safer, standard emojis -->
+            <span class="wait-emoji" id="wait-icon">✋�</span>
+            <h3 id="wait-title"
+                style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--dark-pink); margin-bottom: 10px;">
+                Therakk kootanda!</h3>
+            <p id="wait-msg" style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.5; color: #444;">
+                Onn wait cheyyu 16th Feb aaavatte!<br>Countdown is still running. ❤️
+            </p>
+            <button onclick="closeWaitModal()"
+                style="background: var(--dark-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; font-size: 1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(201, 24, 74, 0.3);">
+                Okay, Njan Wait Cheyyam 😌
+            </button>
+        </div>
+    </div>
+
     <script>
         const overlayCanvas = document.getElementById('overlay-canvas');
         const myConfetti = confetti.create(overlayCanvas, { resize: true, useWorker: true });
 
+        // --- Funny Modal Logic ---
+        let waitAttempts = 0;
+        let rainInterval;
+
+        const funnyMessages = [
+            { icon: "✋😯", title: "Therakk kootanda!", msg: "Onn wait cheyyu 16th Feb aaavatte!<br>Countdown is still running. ❤️" },
+            { icon: "🫣🛑", title: "Ayyyyy!", msg: "Njan paranjal kelkkule? <br>Wait chryyanalle paranje! 😤" },
+            { icon: "🤐🔒", title: "Shhhhh!", msg: "Athra dhrithi aano? 😼<br>Surprise polinj pookum! Wait!" },
+            { icon: "😎⏳", title: "Smart Girl...", msg: "Pakshe 16th Feb nu open aavullu! 😌" }
+        ];
+
+        function showWaitModal() {
+            // Cycle messages
+            const index = waitAttempts % funnyMessages.length;
+            const content = funnyMessages[index];
+
+            // Set content
+            document.getElementById('wait-icon').innerHTML = content.icon; // Use innerHTML for emoji rendering
+            document.getElementById('wait-title').innerText = content.title;
+            document.getElementById('wait-msg').innerHTML = content.msg;
+
+            document.getElementById('wait-modal').classList.add('active');
+            waitAttempts++;
+            startModalRain();
+        }
+
+        function closeWaitModal() {
+            document.getElementById('wait-modal').classList.remove('active');
+            stopModalRain();
+        }
+
+        function startModalRain() {
+            const container = document.getElementById('modal-rain');
+            container.innerHTML = ''; // Clear old rain
+            rainInterval = setInterval(() => {
+                const el = document.createElement('div');
+                el.classList.add('falling-emoji');
+                el.innerText = Math.random() > 0.5 ? '⏰' : '📅';
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.animationDuration = (Math.random() * 2 + 2) + 's'; // 2-4s fall
+                container.appendChild(el);
+                setTimeout(() => el.remove(), 4000); // Cleanup
+            }, 300);
+        }
+
+        function stopModalRain() {
+            clearInterval(rainInterval);
+            document.getElementById('modal-rain').innerHTML = '';
+        }
+
         // Password Logic
         function checkPassword() {
-            const input = document.getElementById('pass-input').value;
-            if (input === '1602') {
-                document.getElementById('lock-screen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('lock-screen').style.display = 'none';
-                    const main = document.getElementById('main-content');
-                    main.style.visibility = 'visible';
-                    main.style.opacity = '1';
-                    unlockScroll();
-                    document.getElementById('bgMusic').play();
-                    setInterval(createHeart, 300);
-                    initDevelopingPhotos();
-                }, 1000);
-            } else { document.getElementById('hint').style.display = 'block'; }
+            const inputField = document.getElementById('pass-input');
+            const input = inputField.value;
+            // distinct formatting to ensure cross-browser compatibility
+            const targetDate = new Date("2026-02-16T00:00:00").getTime();
+            const now = new Date().getTime();
+
+            // Clear shake class so it can re-trigger
+            inputField.classList.remove('shake-input');
+            void inputField.offsetWidth; // Trigger reflow
+
+            if (input === '5286') {
+                // Admin login - always unlock
+                unlockSite();
+            } else if (input === '1602') {
+                // Guest login - check date
+                if (now >= targetDate) {
+                    unlockSite();
+                } else {
+                    inputField.classList.add('shake-input'); // Shake first
+                    setTimeout(showWaitModal, 500); // Then show modal
+                }
+            } else {
+                inputField.classList.add('shake-input');
+                const hint = document.getElementById('hint');
+                hint.style.display = 'block';
+                hint.innerText = "Incorrect PIN. Hint: 1602 🎂";
+            }
+        }
+
+        function unlockSite() {
+            document.getElementById('lock-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('lock-screen').style.display = 'none';
+                const main = document.getElementById('main-content');
+                main.style.visibility = 'visible';
+                main.style.opacity = '1';
+                unlockScroll();
+
+                // Try to play music, handle autoplay policies
+                const audio = document.getElementById('bgMusic');
+                audio.play().catch(error => {
+                    console.log("Autoplay prevented:", error);
+                    // Optional: Show a "Play Music" button if blocked
+                });
+
+                setInterval(createHeart, 300);
+                initDevelopingPhotos();
+            }, 1000);
         }
 
         // JS to handle scroll unlock properly
@@ -1115,7 +1327,6 @@
             document.documentElement.style.overflowX = 'hidden';
         }
 
-        // Developing Photo Observer
         // Developing Photo & Frame Observer
         function initDevelopingPhotos() {
             const observerOptions = { threshold: 0.1 }; // Trigger even earlier for mobile
@@ -1156,7 +1367,7 @@
             document.getElementById('bgMusic').volume = 1.0;
         }
 
-        const target = new Date("Feb 16, 2026 00:00:00").getTime();
+        const target = new Date("2026-02-16T00:00:00").getTime();
         setInterval(() => {
             const diff = target - new Date().getTime();
             if (diff > 0) {
