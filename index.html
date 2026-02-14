@@ -1120,6 +1120,55 @@
             </div>
         </div>
 
+        <!-- --- NEW: Mocking Video Section --- -->
+        <div class="glass-card"
+            style="margin-top: 50px; border: 4px dashed #ff4081; background: rgba(255, 255, 255, 0.9);">
+            <div
+                style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); background: #ff4081; color: white; padding: 10px 30px; border-radius: 50px; font-weight: bold; font-family: 'Poppins', sans-serif; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 10;">
+                ⚠️ WARNING: EXTREME CUTENESS (OR NOT?) ⚠️
+            </div>
+
+            <h2
+                style="font-family:'Dancing Script'; font-size: 3rem; color: var(--dark-pink); margin-top: 30px; margin-bottom: 20px;">
+                The Hidden Talent 🎤😂
+            </h2>
+
+            <p style="font-size: 1.2rem; margin-bottom: 30px; color: #555;">
+                Before you were a "Serious Adult™", you were... <b>THIS!</b> <br>
+                (Sorry, not sorry! 😜)
+            </p>
+
+            <div class="video-mock-wrapper"
+                style="position: relative; max-width: 350px; margin: 0 auto; transform: rotate(-2deg); transition: transform 0.3s ease;">
+                <!-- Film strip border effect -->
+                <div
+                    style="position: absolute; inset: -15px; border: 3px solid #333; background: #222; border-radius: 10px; z-index: -1; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                </div>
+
+                <video controls playsinline preload="metadata"
+                    style="width: 100%; border-radius: 4px; display: block; border: 2px solid white;">
+                    <source src="Hiba_paathu.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <!-- Sticker decoration -->
+                <div
+                    style="position: absolute; bottom: -20px; right: -20px; background: #ffeb3b; color: #333; padding: 5px 15px; transform: rotate(-10deg); font-family: 'Dancing Script'; font-size: 1.5rem; font-weight: bold; box-shadow: 0 3px 10px rgba(0,0,0,0.2); border-radius: 2px;">
+                    #OscarWorthy 🏆
+                </div>
+            </div>
+
+            <style>
+                .video-mock-wrapper:hover {
+                    transform: rotate(0deg) scale(1.02);
+                }
+            </style>
+
+            <div class="memory-date" style="text-align: center; color: var(--dark-pink); margin-top: 40px;">
+                Childhood Archive 👶🏻
+            </div>
+        </div>
+
         <div class="glass-card">
             <h2 style="font-family:'Dancing Script'; font-size: 4rem; color: var(--dark-pink);">16 Reasons Why I Love
                 You</h2>
@@ -1197,8 +1246,13 @@
     <div id="wait-modal">
         <div class="modal-rain-container" id="modal-rain"></div>
         <div class="wait-card">
-            <!-- Using safer, standard emojis -->
-            <span class="wait-emoji" id="wait-icon">✋�</span>
+            <!-- Image for attempt -->
+            <img id="wait-img" src="" alt="Wait Image"
+                style="display: none; max-width: 100%; max-height: 200px; border-radius: 15px; margin: 0 auto 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); object-fit: cover;">
+
+            <!-- Contextual Emoji -->
+            <span class="wait-emoji" id="wait-icon" style="display: block;">✋😯</span>
+
             <h3 id="wait-title"
                 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--dark-pink); margin-bottom: 10px;">
                 Therakk kootanda!</h3>
@@ -1221,10 +1275,10 @@
         let rainInterval;
 
         const funnyMessages = [
-            { icon: "✋😯", title: "Therakk kootanda!", msg: "Onn wait cheyyu 16th Feb aaavatte!<br>Countdown is still running. ❤️" },
-            { icon: "🫣🛑", title: "Ayyyyy!", msg: "Njan paranjal kelkkule? <br>Wait chryyanalle paranje! 😤" },
-            { icon: "🤐🔒", title: "Shhhhh!", msg: "Athra dhrithi aano? 😼<br>Surprise polinj pookum! Wait!" },
-            { icon: "😎⏳", title: "Smart Girl...", msg: "Pakshe 16th Feb nu open aavullu! 😌" }
+            { icon: "✋😯", title: "Therakk kootanda!", msg: "Onn wait cheyyu 16th Feb aaavatte!<br>Countdown is still running. ❤️", img: "attempt_1.jpeg" },
+            { icon: "🫣🛑", title: "Ayyyyy!", msg: "Njan paranjal kelkkule? <br>Wait chryyanalle paranje! 😤", img: "attempt_2.jpeg" },
+            { icon: "🤐🔒", title: "Shhhhh!", msg: "Athra dhrithi aano? 😼<br>Surprise polinj pookum! Wait!", img: "attempt_3.jpeg" },
+            { icon: "😎⏳", title: "Smart Girl...", msg: "Pakshe 16th Feb nu open aavullu! 😌", img: "attempt_4.jpeg" }
         ];
 
         function showWaitModal() {
@@ -1233,9 +1287,18 @@
             const content = funnyMessages[index];
 
             // Set content
-            document.getElementById('wait-icon').innerHTML = content.icon; // Use innerHTML for emoji rendering
+            document.getElementById('wait-icon').innerHTML = content.icon;
             document.getElementById('wait-title').innerText = content.title;
             document.getElementById('wait-msg').innerHTML = content.msg;
+
+            // Set Image
+            const imgEl = document.getElementById('wait-img');
+            if (content.img) {
+                imgEl.src = content.img;
+                imgEl.style.display = "block";
+            } else {
+                imgEl.style.display = "none";
+            }
 
             document.getElementById('wait-modal').classList.add('active');
             waitAttempts++;
